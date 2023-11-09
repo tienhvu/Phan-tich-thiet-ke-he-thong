@@ -1,0 +1,198 @@
+<%@import url('https://fonts.googleapis.com/css?family=Roboto')%>
+:root {
+    --card-width: 600px;
+    --card-width-left: calc(var(--card-width)*0.2);
+    --card-width-right: calc(var(--card-width)*0.8);
+    --primary-text-color: #273F6E;
+}
+
+html {
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+* {
+	box-sizing: border-box;
+
+}
+
+body {
+	background-color: #28223F;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0;
+}
+
+.navbar {
+    background-color: #222;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 46px;
+
+}
+.navbar_text {
+    display: inline-block;
+    line-height: 46px;
+   text-align: center;
+   color: #fff;
+   font-size: 1.4rem;
+   text-decoration: none;
+    padding-left: 20px;
+}
+
+.card-container {
+    position: relative;
+    width: var(--card-width);
+    border-radius: 5px;
+    background-color: #E0EED5;
+    display: flex;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+}
+
+.card-content.left {
+    width: var(--card-width-left);
+    padding: 0;
+    margin: 0 20px;
+}
+
+.logo {
+    display: block;
+    height: 70px;
+    margin-top: 16px;
+}
+
+.logo img {
+    width: auto;
+    height: 100%;
+}
+
+.face {
+    display: block;
+    height: 150px;
+    width: 120px;
+    border: solid 1px #000;
+    margin-top: 30px;
+}
+
+.face img {
+    transform: translateY(37px);
+    height: 75%;
+    width: 100%;
+}
+
+.student-code {
+    text-align: center;
+}
+
+.student-code .title {
+    margin: 10px 0 5px 0;
+    font-size: 1.4rem;
+}
+
+.student-code .value {
+    margin: 0;
+    color: red;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+
+/* Phần bên phải */
+.card-content.right {
+    width: var(--card-width-right);
+    padding: 0 8px;
+    margin-right: 20px;
+    align-items: unset;
+}
+
+.school {
+    text-align: center;
+    border-bottom: 2px solid red;
+    display: block;
+    height: 70px;
+    margin-top: 16px;
+}
+
+.school .big-title {
+    color: var(--primary-text-color);
+    text-transform: uppercase;
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.school .small-title {
+    color: var(--primary-text-color);
+    text-transform: uppercase;
+    margin-top: 10px;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.title-card {
+    color: red;
+    text-transform: uppercase;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.info {
+    list-style: none;
+    padding: 0;
+    display: block;
+    margin: 0 24px 24px;
+}
+
+.info li {
+    margin-bottom: 8px;
+    display: flex;
+    font-size: 1.4rem;
+}
+
+.info li span {
+    color: var(--primary-text-color);
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-left: 30px;
+}
+
+footer {
+    background-color: #222;
+    color: #fff;
+    font-size: 14px;
+    bottom: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 999;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer i {
+    color: red;
+}
+
+footer a {
+    color: #3c97bf;
+    text-decoration: none;
+}
