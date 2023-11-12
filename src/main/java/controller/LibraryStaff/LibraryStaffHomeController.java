@@ -7,12 +7,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Member599;
-import model.Reader.ReaderCard599;
+
 
 import java.io.IOException;
-import java.sql.SQLException;
-@WebServlet(urlPatterns = {"/admin-home","/admin"})
+
+@WebServlet(urlPatterns = {"/admin-home"})
 public class LibraryStaffHomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,10 +21,5 @@ public class LibraryStaffHomeController extends HttpServlet {
             RequestDispatcher rd = req.getRequestDispatcher("/views/admin/home.jsp");
             rd.forward(req, resp);
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
     }
 }

@@ -58,7 +58,7 @@
 
                       <div class="clay-category">
                         <img src="img/payment-method.png" style="width: 21px; height: 21px;" alt="">
-                        <p><a href="#">Trả tài liệu</a></p>
+                        <p><a href="return-documents">Mượn / Trả tài liệu</a></p>
                       </div>
 
                       <div class="clay-category">
@@ -71,10 +71,6 @@
                         <p><a href="#">Tài liệu</a></p>
                       </div>
 
-                      <div class="clay-category">
-                        <img src="img/borrow.png" style="width: 25px; height: 25px;" alt="">
-                        <p><a href="#">Mượn tài liệu</a></p>
-                      </div>
 
                     </div>
                     <hr>
@@ -128,17 +124,6 @@
         }
     }
 
-document.addEventListener("DOMContentLoaded", function () {
-    var notification = document.getElementById("notification");
-    var borrowButtons = document.querySelectorAll(".btn-muon");
-    var detailButtons = document.querySelectorAll(".btn-chitiet");
-    var allButtons = [...borrowButtons, ...detailButtons];
-    allButtons.forEach(function (button) {
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
-        });
-    });
-});
 
 
 </script>

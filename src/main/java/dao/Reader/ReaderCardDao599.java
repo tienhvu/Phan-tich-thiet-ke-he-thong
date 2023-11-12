@@ -2,6 +2,7 @@ package dao.Reader;
 
 import dao.ConnectDatabase;
 
+import model.Member599;
 import model.Reader.ReaderCard599;
 
 import java.sql.Date;
@@ -83,6 +84,27 @@ public class ReaderCardDao599 {
             readerCard.setRegis_date(resultSet.getDate("regis_date"));
             return readerCard;
         }
+        ConnectDatabase.disconnect();
         return null;
+    }
+    public Member599 getMemberByReaderCardId(int cardId) throws SQLException {
+        String sql = "SELECT m.id, m.name FROM tbl_reader_card599 rc\n" +
+                "JOIN tbl_reader599 r ON rc.reader_id = r.id \n" +
+                "JOIN tbl_member599 m ON r.member_id = m.id\n" +
+                "WHERE rc.id = ?";
+        ConnectDatabase.connect();
+
+        PreparedStatement statement = ConnectDatabase.jdbcConnection.prepareStatement(sql);
+        statement.setInt(1, cardId);
+        ResultSet resultSet = statement.executeQuery();
+        if(resultSet.next()){
+            Member599 member599 = new Member599();
+            member599.setId(resultSet.getInt("id"));
+            member599.setName(resultSet.getString("name"));
+            return member599;
+        }
+        ConnectDatabase.disconnect();
+        return null;
+
     }
 }
