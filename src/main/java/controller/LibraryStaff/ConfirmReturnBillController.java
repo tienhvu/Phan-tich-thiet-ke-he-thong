@@ -65,8 +65,6 @@ public class ConfirmReturnBillController extends HttpServlet {
                 returnDetailsDao599.updateReturnDetails(returnDetails599);
                 confirmBill599.setId(returnDetails599.getReturnBill599().getId());
             }
-
-            // Lưu hóa đơn vào session
             session.setAttribute("confirmBill599", confirmBill599);
             session.setAttribute("success", "Tạo hóa đơn thành công");
             resp.sendRedirect("print-bill");
