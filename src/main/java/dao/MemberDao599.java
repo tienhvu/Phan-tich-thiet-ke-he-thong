@@ -1,8 +1,6 @@
 package dao;
 
 import model.Member599;
-
-import java.lang.reflect.Member;
 import java.sql.*;
 
 public class MemberDao599 {
@@ -78,8 +76,8 @@ public class MemberDao599 {
         return null;
     }
 
-    public Integer getMemberIdByUsername(String username) throws SQLException {
-        String sql = "SELECT id FROM tbl_member599 WHERE username = ?";
+    public Member599 getMemberInfoByUsername(String username) throws SQLException {
+        String sql = "SELECT * FROM tbl_member599 WHERE username = ?";
         ConnectDatabase.connect();
 
         PreparedStatement statement = ConnectDatabase.jdbcConnection.prepareStatement(sql);
@@ -87,7 +85,13 @@ public class MemberDao599 {
         ResultSet resultSet = statement.executeQuery();
 
         if (resultSet.next()) {
-            return resultSet.getInt("id");
+            Member599 member599 = new Member599();
+            member599.setId(resultSet.getInt("id"));
+            member599.setUsername(username);
+            member599.setName(resultSet.getString("name"));
+            member599.setPhone(resultSet.getString("phone"));
+            member599.setEmail(resultSet.getString("email"));
+            return member599;
         }
         ConnectDatabase.disconnect();
         return null;

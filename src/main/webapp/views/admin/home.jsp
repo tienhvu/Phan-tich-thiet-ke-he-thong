@@ -46,6 +46,13 @@
                 <div class="ui-row-2">
 
 
+                      <c:if test="${not empty sessionScope.success}">
+                              <div class="alert alert-success">${sessionScope.success}</div>
+                                      <%
+                                           session.removeAttribute("success");
+                                      %>
+                              </c:if>
+
 
                   <div class="main-content">
 
@@ -70,7 +77,10 @@
                         <img src="img/book1.png" alt="">
                         <p><a href="#">Tài liệu</a></p>
                       </div>
-
+                       <div class="clay-category">
+                        <img src="img/book2.png" alt="">
+                        <p><a href="bill-list">Hóa đơn</a></p>
+                      </div>
 
                     </div>
                     <hr>
