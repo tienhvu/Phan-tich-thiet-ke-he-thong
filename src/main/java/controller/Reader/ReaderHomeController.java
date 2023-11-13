@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import jakarta.servlet.http.HttpSession;
 import model.Member599;
-import model.Reader.ReaderCard599;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -26,7 +26,7 @@ public class ReaderHomeController extends HttpServlet {
         try {
             HttpSession session = req.getSession();
             String username = (String) session.getAttribute("username");
-            int memberId = memberDao599.getMemberIdByUsername(username);
+            int memberId = memberDao599.getMemberInfoByUsername(username).getId();
             Member599 member = readerDao599.getMemberInfo(memberId);
             session.setAttribute("member", member);
             RequestDispatcher rd = req.getRequestDispatcher("/views/reader/home.jsp");

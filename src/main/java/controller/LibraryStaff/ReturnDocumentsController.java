@@ -1,6 +1,5 @@
 package controller.LibraryStaff;
 
-import dao.LibraryStaff.BorrowReturnDao599;
 import dao.LibraryStaff.ReturnDetailsDao599;
 import dao.Reader.ReaderCardDao599;
 import jakarta.servlet.RequestDispatcher;
@@ -10,7 +9,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.LibraryStaff.BorrowReturnDocument599;
 import model.LibraryStaff.ReturnDetails599;
 import model.Member599;
 import java.io.IOException;
@@ -34,7 +32,7 @@ public class ReturnDocumentsController extends HttpServlet {
 
         try {
             List<ReturnDetails599> lists = returnDetailsDao599.getBorrowedDocumentsByCardId(cardId);
-            System.out.println(lists.size());
+
             Member599 member599 = readerCardDao599.getMemberByReaderCardId(cardId);
 
             HttpSession session = req.getSession();

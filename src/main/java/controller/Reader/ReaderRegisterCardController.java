@@ -9,9 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import model.Member599;
-import model.Reader.Reader599;
 import model.Reader.ReaderCard599;
 
 import java.io.IOException;
@@ -57,7 +55,7 @@ public class ReaderRegisterCardController extends HttpServlet {
         try {
             MemberDao599 memberDao599 = new MemberDao599();
             ReaderDao599 readerDao599 = new ReaderDao599();
-            int memberId = memberDao599.getMemberIdByUsername(username);
+            int memberId = memberDao599.getMemberInfoByUsername(username).getId();
             ReaderCard599 readerCard = new ReaderCard599();
             readerCard.setReader_id(readerDao599.getReaderId(memberId));
             readerCard.setStudent_code(studentCode);

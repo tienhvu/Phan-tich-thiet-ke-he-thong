@@ -2,8 +2,6 @@ package model.LibraryStaff;
 
 import model.Reader.ReaderCard599;
 
-import java.sql.Date;
-
 public class BorrowReturnDocument599 {
     private int id;
     private ReaderCard599 readerCard599;

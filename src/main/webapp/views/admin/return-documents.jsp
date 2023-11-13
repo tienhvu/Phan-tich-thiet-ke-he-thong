@@ -13,7 +13,6 @@
              rel="stylesheet"
              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
              crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
 </head>
@@ -63,7 +62,7 @@
     <div class="search-container">
             <div class="search-box">
                  <form action="return-documents" method="post">
-                        <input type="text" name="cardId" value ="${cardId}" class="search-input" required placeholder="Tìm kiếm theo mã thẻ bạn đọc">
+                        <input type="number" name="cardId" value ="${cardId}" class="search-input" required placeholder="Tìm kiếm theo mã thẻ bạn đọc">
                         <button type="submit" class="search-button">Tìm</button>
                     </form>
             </div>
@@ -71,56 +70,61 @@
     <div class="container mt-4">
         <%-- Kiểm tra xem danh sách có tồn tại hay không --%>
         <c:if test="${not empty lists}">
-                <table class="table table-bordered text-center">
-                    <thead style="background-color: green;color: white; ">
-                        <h3> Bạn đọc: ${member599.getName().toUpperCase()}</h1>
-                        <tr >
-                            <th scope="col">Chọn</th>
-                            <th scope="col">Mã phiếu mượn trả</th>
-                            <th scope="col">Mã tài liệu</th>
-                            <th scope="col">Tên tài liệu</th>
-                            <th scope="col">Thể loại</th>
-                            <th scope="col">Số lượng</th>
-                            <th scope="col">Ngày mượn</th>
-                            <th scope="col">Ngày hẹn trả</th>
-                            <th scope="col">Ngày trả thực tế</th>
-                            <th scope="col">Tiền phạt</th>
-                            <th scope="col">Lý do phạt</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="document" items="${sessionScope.lists}">
-                            <tr>
-                                <td>
-                                      <input type="checkbox" name="selectedDocuments" value="${document.getDocument599().getId()}" onclick="toggleInputFields(this)">
-                                </td>
-                                <td>${document.getBorrow_return_id()}</td>
-                                <td>${document.getDocument599().getId()}</td>
-                                <td>${document.getDocument599().title}</td>
-                                <td>${document.getDocument599().category}</td>
-                                <td>${document.quantity_borrowed}</td>
-                                <td>${document.borrow_date}</td>
-                                <td>${document.return_date}</td>
-                                <td>
-                                            <input type="date" name="actualReturnDate" value="${document.actual_return_date}" style="width: 80px; display: none;">
-                                        </td>
-                                        <td>
-                                            <input type="number" name="fineAmount" value="${document.fine_amount}" style="width: 80px; display: none;">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="fineReason" value="${document.fine_reason}" style="width: 150px; display: none;">
-                                        </td>
-                            </tr>
-                        </c:forEach>
+              <form action="return-document-bills" method="post" id="returnForm" >
+                     <table class="table table-bordered text-center">
+                                 <thead style="background-color: green;color: white; ">
+                                     <h3> Bạn đọc: ${member599.getName().toUpperCase()}</h1>
+                                     <tr >
+                                         <th scope="col">Chọn</th>
+                                         <th scope="col">Mã phiếu mượn trả</th>
+                                         <th scope="col">Mã tài liệu</th>
+                                         <th scope="col">Tên tài liệu</th>
+                                         <th scope="col">Thể loại</th>
+                                         <th scope="col">Số lượng</th>
+                                         <th scope="col">Ngày mượn</th>
+                                         <th scope="col">Ngày hẹn trả</th>
+                                         <th scope="col">Ngày trả thực tế</th>
+                                         <th scope="col">Tiền phạt</th>
+                                         <th scope="col">Lý do phạt</th>
+                                         <th scope="col">Trạng thái</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     <c:forEach var="document" items="${sessionScope.lists}">
+                                         <tr>
+                                             <td>
+                                                  <input type="checkbox" name="selected" value="${document.getId()}" onclick="toggleInputFields(this)"
+                                                                      ${document.status == 1 ? 'disabled' : ''}>
+                                             </td>
+                                             <td>${document.getBorrow_return_id()}</td>
+                                             <td>${document.getDocument599().getId()}</td>
+                                             <td>${document.getDocument599().title}</td>
+                                             <td>${document.getDocument599().category}</td>
+                                             <td>${document.quantity_borrowed}</td>
+                                             <td>${document.borrow_date}</td>
+                                             <td>${document.return_date}</td>
+                                             <td>
+                                                  <input type="date" name="actualReturnDate_${document.getId()}" required value="${document.actual_return_date}" style="width: 80px;" disabled>
+                                             </td>
+                                             <td>
+                                                  <input type="number" name="fineAmount_${document.getId()}" value="${document.fine_amount}" style="width: 80px;" disabled>
+                                             </td>
+                                             <td>
+                                                  <input type="text" name="fineReason_${document.getId()}" value="${document.fine_reason}" style="width: 150px;" disabled>
+                                             </td>
+                                             <td>
+                                                   ${document.status == 1 ? 'Đã trả' : 'Chưa trả'}
+                                             </td>
+                                         </tr>
+                                     </c:forEach>
 
-                    </tbody>
-                </table>
-                <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-success">
-                            <a href="#" style="text-decoration: none;color:white; margin-bottom: 24px;">Xác nhận trả</a>
-                        </button>
-                    </div>
-            </c:if>
+                                 </tbody>
+                     </table>
+                     <div class="d-flex justify-content-center" style="margin-bottom: 50px;">
+                           <button type="submit" class="btn btn-success text-white" disabled>Xác nhận trả</button>
+                     </div>
+              </form>
+        </c:if>
 
         <%-- Nếu danh sách rỗng hoặc không tồn tại --%>
         <c:if test="${empty lists}">
@@ -137,7 +141,7 @@
                 </p>
               </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <script>
     function confirmLogout() {
         var result = confirm("Bạn có chắc chắn muốn đăng xuất?");
@@ -146,19 +150,32 @@
             window.location.href = "logout";
         }
     }
-
+    var statusColumnIndex = 11;
     function toggleInputFields(checkbox) {
-            var row = checkbox.parentNode.parentNode;
-            var inputs = row.getElementsByTagName('input');
+        var row = checkbox.parentNode.parentNode;
+        var statusCell = row.cells[statusColumnIndex];
 
+        if (statusCell.innerHTML.trim() !== 'Đã trả') {
+            var inputs = row.getElementsByTagName('input');
             for (var i = 1; i < inputs.length; i++) {
-                if (checkbox.checked) {
-                    inputs[i].style.display = 'block';
-                } else {
-                    inputs[i].style.display = 'none';
-                }
+                inputs[i].disabled = !checkbox.checked;
             }
+        } else {
+            checkbox.checked = false;
         }
+        updateSubmitButtonState();
+    }
+
+      function updateSubmitButtonState() {
+             var checkboxes = document.querySelectorAll('input[name="selected"]:checked');
+             var submitButton = document.querySelector('.btn-success');
+
+             if (checkboxes.length > 0) {
+                 submitButton.removeAttribute('disabled');
+             } else {
+                 submitButton.setAttribute('disabled', 'disabled');
+             }
+         }
 </script>
  </body>
  </html>

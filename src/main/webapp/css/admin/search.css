@@ -50,17 +50,18 @@ table {
     font-size: 13px;
 
 }
+
 footer {
     position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
-    z-index: 1;
+    background-color:#fff;
 }
+
 .footer__bottom {
     display: block;
     text-align: center;
-
     margin: 0 auto;
     padding-top: 8px;
     bottom: 0;
